@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SomnWorks Form</title>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#007bff" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="SomnWorks" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+
+  <style>
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: #f0f4f8;
+      font-family: Arial, sans-serif;
+    }
+    a {
+      text-decoration: none;
+      color: #007bff;
+      font-weight: bold;
+      font-size: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    img {
+      width: 150px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:disabled {
+      background: grey;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <a href="https://form.jotform.com/240503008471041" target="_blank" rel="noopener noreferrer">
+    <img src="icons/icon-192.png" alt="SomnWorks Logo" />
+    Open Form
+  </a>
+  <button id="installBtn" disabled>Install App</button>
+
+  <script>
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.disabled = false;
+    });
+
+    installBtn.addEventListener('click', () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          deferredPrompt = null;
+          installBtn.disabled = true;
+        });
+      }
+    });
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js').then(() => {
+        console.log('Service Worker Registered');
+      });
+    }
+  </script>
+</body>
+</html>
