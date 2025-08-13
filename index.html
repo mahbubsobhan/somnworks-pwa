@@ -7,14 +7,33 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#ffffff">
 </head>
-<body>
+<body style="text-align:center; font-family:Arial;">
     <h1>Somnworks App</h1>
     <p>Install this app for quick access.</p>
 
     <script>
-        // If running as an installed PWA, redirect to JotForm
-        if (window.matchMedia('(display-mode: standalone)').matches) {
+        // Check if running as standalone (mobile/desktop PWA)
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+
+        if (isStandalone) {
+            // Installed app → redirect directly to Jotform
             window.location.href = "https://form.jotform.com/240503008471041";
+        } else {
+            // Not installed → show install prompt
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                let installBtn = document.createElement('button');
+                installBtn.innerText = 'Install App';
+                installBtn.style.fontSize = '20px';
+                installBtn.style.padding = '10px 20px';
+                installBtn.style.marginTop = '50px';
+                installBtn.style.cursor = 'pointer';
+                document.body.appendChild(installBtn);
+
+                installBtn.addEventListener('click', () => {
+                    e.prompt();
+                });
+            });
         }
     </script>
 </body>
