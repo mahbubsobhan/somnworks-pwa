@@ -1,20 +1,7 @@
-self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open('somnworks-cache').then((cache) => {
-      return cache.addAll([
-        './index.html',
-        './manifest.json',
-        './icons/icon-192.png',
-        './icons/icon-512.png'
-      ]);
-    })
-  );
+self.addEventListener('install', event => {
+  event.waitUntil(self.skipWaiting());
 });
 
-self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    caches.match(e.request).then((response) => {
-      return response || fetch(e.request);
-    })
-  );
+self.addEventListener('activate', event => {
+  event.waitUntil(self.clients.claim());
 });
