@@ -1,10 +1,10 @@
 {
-  "name": "SomnWorks",
-  "short_name": "SomnWorks",
-  "start_url": "https://form.jotform.com/240503008471041",
+  "name": "Somnworks App",
+  "short_name": "Somnworks",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#007bff",
+  "theme_color": "#ffffff",
   "icons": [
     {
       "src": "icons/icon-192.png",

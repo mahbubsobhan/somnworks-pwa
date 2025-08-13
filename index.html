@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Redirecting...</title>
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#007bff"/>
-  <script>
-    window.location.href = "https://form.jotform.com/240503008471041";
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Somnworks App</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffffff">
 </head>
 <body>
-  Redirecting...
+    <h1>Somnworks App</h1>
+    <p>Install this app for quick access.</p>
+
+    <script>
+        // If running as an installed PWA, redirect to JotForm
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            window.location.href = "https://form.jotform.com/240503008471041";
+        }
+    </script>
 </body>
 </html>
