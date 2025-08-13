@@ -1,6 +1,6 @@
 {
-  "name": "Somnworks App",
-  "short_name": "Somnworks",
+  "name": "Somno Works App",
+  "short_name": "Somno Works",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
